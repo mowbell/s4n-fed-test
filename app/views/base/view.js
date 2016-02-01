@@ -7,5 +7,12 @@ module.exports = Chaplin.View.extend({
 
   getTemplateFunction: function(){
     return this.template;
+  },
+  render:function(){
+  	Chaplin.View.prototype.render.apply(this, arguments);
+  	this.afterRender();
+  },
+  afterRender:function(){
   }
+
 });
