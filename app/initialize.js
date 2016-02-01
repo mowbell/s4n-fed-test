@@ -3,7 +3,7 @@ var routes = require('routes');
 
 $(function() {
   return new Application({
-    title: 'Brunch example application',
+    title: 'GitHub Vacantes',
     controllerSuffix: '-controller',
     routes: routes
   });
