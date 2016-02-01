@@ -4,11 +4,11 @@
   "main": "public/javascripts/app.js",
   "dependencies": {
     "chaplin": "~1.0.0",
-    "console-polyfill": "~0.1.0",
     "lodash": "~2.0.0",
     "jquery": "~2.0.2",
-    "normalize-css": "~2.1.2",
-    "h5bp-helpers": "~0.1.0"
+    "semantic":"~2.1.8",
+    "jquery.cookie":"~1.4.1",
+    "jquery-tablesort":"~0.0.6"
   },
   "overrides": {
     "backbone": {
@@ -17,6 +17,12 @@
         "jquery": "*"
       },
       "main": "backbone.js"
+    },
+    "semantic": {
+      "main": [
+        "dist/semantic.css",
+        "dist/semantic.js"
+      ]
     }
   }
 }

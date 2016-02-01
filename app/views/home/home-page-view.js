@@ -6,8 +6,12 @@ module.exports = View.extend({
   template: require('./templates/home'),
   initialize:function(){
   	View.prototype.initialize.apply(this,arguments);
-  	this.testGitHubGetUser();
-  	this.testGitHubGetUserRepositories();
+  	//this.testGitHubGetUser();
+  	//this.testGitHubGetUserRepositories();
+  	this.on('addedToDOM', function(){
+  		debugger
+  		$('table').tablesort();
+  	});
   },
   testGitHubGetUser:function(){
   	$.get(
