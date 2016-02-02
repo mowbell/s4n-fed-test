@@ -1,0 +1,23 @@
+<table class="ui sortable celled table">
+    <thead>
+        <tr>
+            <th class="">Nombre</th>
+            <th class="">Descripción</th>
+            <th class="">Lenguaje</th>
+            <th class="">Branch por defecto</th>
+            <th class="sorted descending">URL git</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {{#each items}}
+        <tr>
+            <td >{{name}}</td>
+            <td >{{description}}</td>
+            <td >{{language}}</td>
+            <td >{{default_branch}}</td>
+            <td ><a href="{{git_url}}" target="_blank">{{git_url}}</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

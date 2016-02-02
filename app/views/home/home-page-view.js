@@ -15,16 +15,14 @@ module.exports = View.extend({
   		$('table').tablesort();
   	});*/
 	this.subscribeEvent('user-registered', this.onUserRegistered);
+	this.subscribeEvent('user-unregistered', this.onUserUnegistered);
   },
   afterRender:function(){
-  	var cookieValues=$.cookie('github-vacante');
-  	if(cookieValues!=null){
-  		var user=JSON.parse(cookieValues);
-  		if(user.userName){
+  	if(this.user && this.user.userName){
   			this.showUserReposView();			
   			return
-  		}
   	}
+  	
   	this.showRegisterView();
   },
   showRegisterView:function(){
@@ -37,6 +35,9 @@ module.exports = View.extend({
   },
   onUserRegistered:function(){
   	this.showUserReposView();
+  },
+  onUserUnegistered:function(){
+  	this.showRegisterView();
   },
   dispose:function(){
   	View.prototype.dispose.apply(this,arguments);
