@@ -1,3 +1,33 @@
+## Instrucciones para ejecutar
+clonar este repositorio
+
+* Instalar http-server de node
+    * `npm install -g http-server`
+* En command line, ubicarse en la carpeta `build`
+* Ejecutar
+	* `http-server`
+* Abrir ventana en navegador Chrome
+	* 127.0.0.1:8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Brunch with Chaplin JS
 ![bwc-logo](http://brunch.io/images/svg/brunch.svg)
 
