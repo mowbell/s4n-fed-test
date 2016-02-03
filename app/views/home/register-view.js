@@ -78,6 +78,7 @@ module.exports = View.extend({
       this.$('.ui.form').removeClass('loading');
       var userFields=this.$('.ui.form').form('get values')
       $.cookie('github-vacante', JSON.stringify(userFields));
+      this.model.set(userFields);
       this.publishEvent('user-registered');
     },
     onGithubUserInvalid:function(){

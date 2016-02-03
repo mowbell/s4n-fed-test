@@ -14,21 +14,37 @@ module.exports = View.extend({
   afterRender:function(){
     this.loadRepositories();
     this.$('table').tablesort();
+    var that=this;
+    var debounced = _.debounce(function(){
+      that.makeAPIRequest(url).always(function(){
+        that.$('.repo-search-txt').parent().removeClass('loading');  
+      })
+    }, 300);
+    
+    this.$('.repo-search-txt').keyup(function(){
+      var searchText=that.$('.repo-search-txt').val();
+      if(searchText.length>=1 && searchText.length<3) return;
+      that.$('.repo-search-txt').parent().addClass('loading');
+      var query=(searchText?searchText:'')+' in:name user:'+that.model.get('userName');
+      url='https://api.github.com/search/repositories?q='+query+'&per_page=5';
+        debounced();
+    });
   },
   onRegisterAnotherUser:function(){
   	$.removeCookie('github-vacante');
+    this.model.clear();
   	this.publishEvent('user-unregistered')
   },
   loadRepositories:function(){
     var that=this;
     var searchText=this.$('.repo-search-txt').val();
-    var query=(searchText?searchText:'')+' in:name user:'+this.user.userName;
+    var query=(searchText?searchText:'')+' in:name user:'+that.model.get('userName');
     var url='https://api.github.com/search/repositories?q='+query+'&per_page=5';
     this.makeAPIRequest(url);
   },
   makeAPIRequest:function(url){
     var that=this;
-    $.get(url)
+    return $.get(url)
     .done(function(data,textStatus, request){
       that.displayRepositories(data,textStatus, request);
     })
@@ -39,6 +55,7 @@ module.exports = View.extend({
   displayRepositories:function(data,textStatus, request){
     var linksHeader=request.getResponseHeader('Link');
       var links={first:null, next:null, prev:null, last:null};
+      if(linksHeader)
       _.each(linksHeader.split(','), function(link){
         var linkData=link.split(';');
         var key=linkData[1].slice(6,-1);
